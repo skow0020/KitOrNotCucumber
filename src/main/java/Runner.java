@@ -4,12 +4,18 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import core.UiSelector;
 
 /**
  * Created by Colin on 3/12/2017.
  */
-public class Main {
-    public static void main(String[] args) throws MalformedURLException {
+public class Runner {
+    public static void main(String[] args) {
+
+    //LEFT OFF ON PART 8
+
+    }
+}
 
 
 
@@ -22,10 +28,7 @@ public class Main {
 
 
 
-
-
-
-        //-----------------------------------------------Intro Tutorlial Stuff------------------------------------------
+        //-----------------------------------------------Intro Tutorial Stuff------------------------------------------
 //        DesiredCapabilities caps = new DesiredCapabilities();
 //        caps.setCapability("deviceName", "VS9854G9e1c8906");
 //        caps.setCapability("platformName", "Android");
@@ -61,5 +64,5 @@ public class Main {
 //
 //        //driver.findElementByAndroidUIAutomator("new UiSelector().resourceId(\"org.isoron.uhabits:id/action_edit_habit\").checked(true)").click();
 //        driver.quit();
-    }
-}
+//    }
+//}
