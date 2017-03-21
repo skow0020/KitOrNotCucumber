@@ -22,7 +22,7 @@ public class Timer {
 
     public boolean expired(int seconds)
     {
-        int difference = (int) ((getTimeStamp() - startStamp)) / 1000;
+        int difference = (int) ((getTimeStamp() - startStamp) / 1000);
         return difference > seconds;
     }
 }

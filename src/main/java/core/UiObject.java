@@ -3,8 +3,8 @@ package core;
 import api.android.Android;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.NoSuchElementException;
 
-import java.util.NoSuchElementException;
 
 /**
  * Created by Colin on 3/20/2017.
@@ -16,7 +16,7 @@ public class UiObject {
     UiObject(String locator)
     {
         this.locator = locator;
-        System.out.println(locator);
+        MyLogger.log.debug("Created new UiObject: " + this.locator);
     }
 
     private boolean isXpath()
