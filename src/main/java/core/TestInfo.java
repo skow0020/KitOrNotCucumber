@@ -14,7 +14,8 @@ public class TestInfo {
         NOTES,
         EXPECTED,
         ACTUAL,
-        VERSION;
+        VERSION,
+        RESULT;
 
     public void reset()
     {
@@ -26,6 +27,7 @@ public class TestInfo {
         EXPECTED = null;
         ACTUAL = null;
         VERSION = null;
+        RESULT = null;
     }
 
     public TestInfo timestamp(String value)
@@ -76,6 +78,11 @@ public class TestInfo {
         return this;
     }
 
+    public static void result(String result)
+    {
+        VERSION = result;
+    }
+
     public static String timestamp()
     {
         return TIMESTAMP;
@@ -115,6 +122,8 @@ public class TestInfo {
     {
         return VERSION;
     }
+
+    public static String result() { return RESULT; }
 
     public static void printResults()
     {
