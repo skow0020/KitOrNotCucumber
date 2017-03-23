@@ -5,6 +5,17 @@ apply plugin: 'java'
 
 sourceCompatibility = 1.6
 
+task buildJar(type: Jar){
+    manifest{
+        attributes 'Implementation-Title': 'Appium Framework',
+                'Implementation-Version': version,
+                'Main-Class': 'Runner'
+    }
+    baseName = project.name + "-FM"
+    from {configurations.compile.collect {it.isDirectory() ? it:zipTree(it)}}
+    with jar
+}
+
 repositories {
     mavenCentral()
 }
