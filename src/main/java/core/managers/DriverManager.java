@@ -3,19 +3,25 @@ package core.managers;
 import api.android.Android;
 import core.ADB;
 import core.MyLogger;
+import core.Timer;
 import core.constants.Arg;
+import core.constants.Resources;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.apache.xpath.operations.And;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.service.DriverService;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.MalformedInputException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 /**
  * Created by Colin on 3/20/2017.
@@ -115,6 +121,82 @@ public class DriverManager {
         else
         {
             MyLogger.log.info("Android Driver is not initialized, nothing to kill");
+        }
+    }
+
+    //--------------------------STUFF FOR PARALLEL TESTING ON MULTIPLE DEVICES (CURRENTLY NOT USED, SEE TTUTORIAL PART 20)----------------------
+    private static void queueUp()
+    {
+        try {
+            MyLogger.log.info("Queueing Up: " + deviceID);
+            JSONObject json = new JSONObject();
+            json.put("queued_at", Timer.getTimeStamp());
+            JSONObject jsonQueue = Resources.getQueue();
+            jsonQueue.put(deviceID, json);
+            MyLogger.log.info("JSON Queue: " +jsonQueue);
+            ServerManager.write(new File(Resources.QUEUE), jsonQueue.toString());
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static boolean useDevice(String deviceID)
+    {
+        try {
+            JSONObject json = Resources.getQueue();
+            if (json.containsKey(deviceID))
+            {
+                JSONObject deviceJson = (JSONObject) json.get(deviceID);
+                long time = (long) deviceJson.get("queued_at");
+                int diff = Timer.getDifference(time, Timer.getTimeStamp());
+                if (diff >=30) return true;
+                else return false;
+            }else return true;
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static void gracePeriod()
+    {
+        int waitTime = 0;
+        try {
+            JSONObject json = Resources.getQueue();
+            Set keys = json.keySet();
+
+            JSONObject ourDeviceJson = (JSONObject) json.get(deviceID);
+            json.remove(deviceID);
+            long weQueuedAt = (long) ourDeviceJson.get("queued_at");
+
+            for (Object key : keys)
+            {
+                JSONObject deviceJson = (JSONObject) json.get(key);
+                long theyQueuedAt = (long) deviceJson.get("queued_at");
+                //If we did not queue first we need to wait for the other device to initialize driver so there is no collision
+                if (weQueuedAt > theyQueuedAt)
+                {
+                    //But only if device queued first and recently, otherwise we can assume device we already initialized or no longer being used
+                    int diff = Timer.getDifference(theyQueuedAt, Timer.getTimeStamp());
+                    if (diff < 50){
+                        MyLogger.log.info("Device : " + key + " queued first, I will need to give it extra time to initialize");
+                        waitTime += 15;
+                    }
+                }
+            }
+            try {Thread.sleep(waitTime);} catch (InterruptedException e) {e.printStackTrace();}
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void leaveQueue()
+    {
+        try {
+            JSONObject jsonQueue = Resources.getQueue();
+            jsonQueue.remove(deviceID);
+            ServerManager.write(new File(Resources.QUEUE), jsonQueue.toString());
+        }  catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
         }
     }
 }
