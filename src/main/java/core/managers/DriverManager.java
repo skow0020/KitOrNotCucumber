@@ -28,9 +28,9 @@ import java.util.Set;
  */
 public class DriverManager {
 
-//    private static String nodeJS = System.getenv("APPIUM_HOME") + "/node.exe";
-//    private static String appiumJS = System.getenv("APPIUM_HOME") + "/node_modules/appium/bin/appium.js";
-//    private static DriverService service;
+    private static String nodeJS = System.getenv("APPIUM_HOME") + "/node.exe";
+    private static String appiumJS = System.getenv("APPIUM_HOME") + "/node_modules/appium/bin/appium.js";
+    private static DriverService service;
     private static String deviceID;
 
     private static HashMap<String, URL> hosts;
@@ -42,7 +42,7 @@ public class DriverManager {
         DesiredCapabilities caps = new DesiredCapabilities();
             caps.setCapability("deviceName", deviceID);
             caps.setCapability("platformName", "Android");
-            caps.setCapability("app", "C:\\Program Files (x86)\\Appium\\node_modules\\appium\\build\\unlock_apk\\unlock_apk-debug.apk");
+            caps.setCapability("app", "C:\\webdrivers\\unlock_apk-debug.apk");
         return caps;
     }
 
@@ -77,18 +77,18 @@ public class DriverManager {
         return availableDevices;
     }
 
-//    private static DriverService createService() throws MalformedURLException
-//    {
-//        String[] parts = host(deviceID).toString().split(":");
-//        service = new AppiumServiceBuilder()
-//                .usingDriverExecutable(new File(nodeJS))
-//                .withAppiumJS(new File(appiumJS))
-//                .withIPAddress(parts[1].replace("//", ""))
-//                .usingPort(Integer.parseInt(parts[2].replace("/wd/hub", "")))
-//                .withArgument(Arg.TIMEOUT, "120")
-//                .build();
-//        return service;
-//    }
+    private static DriverService createService() throws MalformedURLException
+    {
+        String[] parts = host(deviceID).toString().split(":");
+        service = new AppiumServiceBuilder()
+                .usingDriverExecutable(new File(nodeJS))
+                .withAppiumJS(new File(appiumJS))
+                .withIPAddress(parts[1].replace("//", ""))
+                .usingPort(Integer.parseInt(parts[2].replace("/wd/hub", "")))
+                .withArgument(Arg.TIMEOUT, "120")
+                .build();
+        return service;
+    }
 
     public static void createDriver() throws MalformedURLException
     {
@@ -98,7 +98,7 @@ public class DriverManager {
             try {
                 deviceID = device;
                 MyLogger.log.info("Trying to create new Driver for device: " + device);
-                //createService().start();
+                createService().start();
                 Android.driver = new AndroidDriver(host(device), getCaps(device));
                 Android.adb = new ADB(device);
                 break;
@@ -116,7 +116,7 @@ public class DriverManager {
             MyLogger.log.info("Killing Android Driver");
             Android.driver.quit();
             Android.adb.uninstallApp(unlockPackage);
-            //service.stop();
+            service.stop();
         }
         else
         {

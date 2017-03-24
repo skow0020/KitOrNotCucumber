@@ -44,6 +44,7 @@ public class TestManager {
             TestInfo.result("Failed");
             MyLogger.log.info("Test Failed: ");
             TestInfo.printResults();
+            addToResults();
         }
         @Override
         public void succeeded(Description description)
@@ -51,6 +52,7 @@ public class TestManager {
             TestInfo.result("Passed");
             MyLogger.log.info("Test Passed: ");
             TestInfo.printResults();
+            addToResults();
         }
     };
 
