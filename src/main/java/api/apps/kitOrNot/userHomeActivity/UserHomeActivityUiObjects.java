@@ -9,6 +9,7 @@ import core.UiSelector;
 public class UserHomeActivityUiObjects {
 
     private static UiObject
+            deleteBtn,
             userCatsTitle,
             addImageBtn,
             ratingActivityBtn,
@@ -16,6 +17,12 @@ public class UserHomeActivityUiObjects {
             gridView,
             gridImage0,
             gridImage1;
+
+    public UiObject deleteBtn()
+    {
+        if (deleteBtn == null ) deleteBtn = new UiSelector().text("Delete").makeUiObject();
+        return deleteBtn;
+    }
 
     public UiObject userCatsTitle()
     {

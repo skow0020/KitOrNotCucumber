@@ -1,6 +1,7 @@
 package api.apps.kitOrNot.userHomeActivity;
 
 import api.android.Android;
+import api.apps.kitOrNot.photoAlbumActivity.PhotoAlbumActivity;
 import api.apps.kitOrNot.ratingActivity.RatingActivity;
 import api.apps.kitOrNot.topCatsActivity.TopCatsActivity;
 import api.interfaces.Activity;
@@ -41,7 +42,7 @@ public class UserHomeActivity implements Activity {
     {
         try{
             MyLogger.log.info("Tapping on Top Cats button");
-            uiObject.ratingActivityBtn().tap();
+            uiObject.topCatsBtn().tap();
             return Android.app.kitTest.topCatsActivity;
         }catch (NoSuchElementException e)
         {
@@ -49,14 +50,27 @@ public class UserHomeActivity implements Activity {
         }
     }
 
-    public void tapAddCatImageBtn()
+    public PhotoAlbumActivity tapAddCatImageBtn()
     {
         try{
             MyLogger.log.info("Tapping on Add Cat image button");
             uiObject.addImageBtn().tap();
+            return Android.app.kitTest.photoAlbumActivity;
         }catch (NoSuchElementException e)
         {
             throw new AssertionError("Can't tap Add Image Button, element absent or blocked");
+        }
+    }
+
+    public PhotoAlbumActivity longClickTopLeftImg()
+    {
+        try{
+            MyLogger.log.info("Long click on top left image");
+            uiObject.gridImage0().longClick();
+            return Android.app.kitTest.photoAlbumActivity;
+        }catch (NoSuchElementException e)
+        {
+            throw new AssertionError("Can't tap top left image, element absent or blocked");
         }
     }
 }

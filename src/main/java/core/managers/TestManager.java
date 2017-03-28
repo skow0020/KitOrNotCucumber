@@ -12,10 +12,6 @@ import org.junit.runner.Description;
 
 import java.util.*;
 
-
-/**
- * Created by Colin on 3/20/2017.
- */
 public class TestManager {
 
     public static TestInfo testinfo = new TestInfo();

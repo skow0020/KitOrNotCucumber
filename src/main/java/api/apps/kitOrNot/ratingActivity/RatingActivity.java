@@ -15,8 +15,8 @@ public class RatingActivity implements Activity {
     public RatingActivity waitToLoad() {
         try{
             MyLogger.log.info("Waiting for Rating activity");
-            uiObject.catImage().waitToAppear(10);
-            return Android.app.kitTest.ratingActivity.waitToLoad();
+            uiObject.thumbUp().waitToAppear(10);
+            return Android.app.kitTest.ratingActivity;
         }catch (AssertionError e)
         {
             throw new AssertionError("Rating activity failed to load/open");

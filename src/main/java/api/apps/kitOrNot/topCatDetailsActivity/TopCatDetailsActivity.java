@@ -15,7 +15,7 @@ public class TopCatDetailsActivity implements Activity {
         try{
             MyLogger.log.info("Waiting for Top Cat Details activity");
             uiObject.catImage().waitToAppear(10);
-            return Android.app.kitTest.topCatDetailsActivity.waitToLoad();
+            return Android.app.kitTest.topCatDetailsActivity;
         }catch (AssertionError e)
         {
             throw new AssertionError("Top Cat Details activity failed to load/open");

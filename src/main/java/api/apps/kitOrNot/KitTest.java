@@ -2,6 +2,8 @@ package api.apps.kitOrNot;
 
 import api.android.Android;
 import api.apps.kitOrNot.loginActivity.Login;
+import api.apps.kitOrNot.photoAlbumActivity.PhotoAlbumActivity;
+import api.apps.kitOrNot.photoAlbumActivity.selectImageActivity.SelectImageActivity;
 import api.apps.kitOrNot.ratingActivity.RatingActivity;
 import api.apps.kitOrNot.topCatDetailsActivity.TopCatDetailsActivity;
 import api.apps.kitOrNot.topCatsActivity.TopCatsActivity;
@@ -20,6 +22,8 @@ public class KitTest implements Application {
     public TopCatsActivity topCatsActivity = new TopCatsActivity();
     public TopCatDetailsActivity topCatDetailsActivity = new TopCatDetailsActivity();
     public UserCatDetailsActivity userCatDetailsActivity = new UserCatDetailsActivity();
+    public PhotoAlbumActivity photoAlbumActivity = new PhotoAlbumActivity();
+    public SelectImageActivity selectImageActivity = new SelectImageActivity();
 
     public void forceStop() {
         Android.adb.forceStopApp(packageID());

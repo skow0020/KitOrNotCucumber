@@ -14,7 +14,7 @@ public class UserCatDetailsActivity {
         try{
             MyLogger.log.info("Waiting for User Cat Details activity");
             uiObject.catImage().waitToAppear(10);
-            return Android.app.kitTest.userCatDetailsActivity.waitToLoad();
+            return Android.app.kitTest.userCatDetailsActivity;
         }catch (AssertionError e)
         {
             throw new AssertionError("User Cat Details activity failed to load/open");

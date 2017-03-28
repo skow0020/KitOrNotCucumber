@@ -1,6 +1,7 @@
 package core;
 
 import api.android.Android;
+import io.appium.java_client.TouchAction;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.NoSuchElementException;
@@ -160,6 +161,14 @@ public class UiObject {
     {
         if(isXpath()) Android.driver.findElementByXPath(locator).click();
         else Android.driver.findElementByAndroidUIAutomator(locator).click();
+        return this;
+    }
+
+    public UiObject longClick()
+    {
+        TouchAction action = new TouchAction(Android.driver);
+        if(isXpath()) action.longPress(Android.driver.findElementByXPath(locator)).release().perform();
+        else action.longPress(Android.driver.findElementByAndroidUIAutomator(locator)).release().perform();
         return this;
     }
 

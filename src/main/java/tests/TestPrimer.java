@@ -11,7 +11,7 @@ import java.io.IOException;
 import static core.managers.TestManager.jsonArray;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({KitNavigation.class, Navigation.class})
+@Suite.SuiteClasses({KitNavigation.class})
 public class TestPrimer {
 
     @AfterClass
