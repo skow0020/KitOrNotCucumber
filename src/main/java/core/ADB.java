@@ -52,7 +52,7 @@ public class ADB {
 
     public String getForegroundActivitiy()
     {
-        return command("adb -s " + ID + " shell dupmsys window windows | grep mCurrentFocus");
+        return command("adb -s " + ID + " shell dumpsys window windows | findstr Focus");
     }
 
     public String getAndroidVersionAsString()

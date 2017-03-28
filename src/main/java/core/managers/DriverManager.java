@@ -8,7 +8,6 @@ import core.constants.Arg;
 import core.constants.Resources;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
-import org.apache.xpath.operations.And;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -18,7 +17,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.charset.MalformedInputException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
@@ -42,7 +40,7 @@ public class DriverManager {
         DesiredCapabilities caps = new DesiredCapabilities();
             caps.setCapability("deviceName", deviceID);
             caps.setCapability("platformName", "Android");
-            caps.setCapability("app", "C:\\webdrivers\\unlock_apk-debug.apk");
+            caps.setCapability("app", "C:/webdrivers/unlock_apk-debug.apk");
         return caps;
     }
 

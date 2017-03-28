@@ -80,7 +80,7 @@ public class TestInfo {
 
     public static void result(String result)
     {
-        VERSION = result;
+        RESULT = result;
     }
 
     public static String timestamp()
@@ -130,5 +130,7 @@ public class TestInfo {
         MyLogger.log.info("Test ID: " + id());
         MyLogger.log.info("Test Name: " + name());
         MyLogger.log.info("Test Suite: " + suite());
+        MyLogger.log.info("Result: " + result());
+        MyLogger.log.info("Message: " + notes());
     }
 }

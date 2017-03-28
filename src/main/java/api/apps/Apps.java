@@ -1,5 +1,6 @@
 package api.apps;
 
+import api.apps.kitOrNot.KitTest;
 import api.apps.speedtest.Speedtest;
 
 /**
@@ -8,4 +9,5 @@ import api.apps.speedtest.Speedtest;
 public class Apps {
 
     public Speedtest speedtest = new Speedtest();
+    public KitTest kitTest = new KitTest();
 }

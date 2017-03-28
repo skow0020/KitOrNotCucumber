@@ -4,17 +4,12 @@ import core.MyLogger;
 import core.Retry;
 import core.TestInfo;
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Rule;
-import org.junit.Test;
 import org.junit.rules.TestRule;
 import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.*;
 
 
@@ -41,17 +36,19 @@ public class TestManager {
         @Override
         public void failed(Throwable t, Description description)
         {
-            TestInfo.result("Failed");
+            testinfo.result("Failed");
+            testinfo.notes(t.getLocalizedMessage());
             MyLogger.log.info("Test Failed: ");
-            TestInfo.printResults();
+            testinfo.printResults();
             addToResults();
         }
         @Override
         public void succeeded(Description description)
         {
             TestInfo.result("Passed");
+            testinfo.notes("");
             MyLogger.log.info("Test Passed: ");
-            TestInfo.printResults();
+            testinfo.printResults();
             addToResults();
         }
     };
@@ -61,7 +58,9 @@ public class TestManager {
         Map result = new HashMap<String, String>();
         result.put("ID", TestInfo.id());
         result.put("Name", TestInfo.name());
+        result.put("Suite", TestInfo.suite());
         result.put("Result", TestInfo.result());
+        result.put("Message", TestInfo.notes());
         results.add(result);
         jsonArray.add(result);
     }
