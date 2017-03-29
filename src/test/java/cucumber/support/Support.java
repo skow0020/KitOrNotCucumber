@@ -68,7 +68,6 @@ public class Support {
         Assert.assertTrue(kitTest.topCatsActivity.uiObject.gridImage1().exists());
     }
 
-
     public void verifyImageAdd()
     {
         kitTest.userHomeActivity.tapAddCatImageBtn().waitToLoad();

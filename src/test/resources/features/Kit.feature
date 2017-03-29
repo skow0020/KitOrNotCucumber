@@ -29,8 +29,3 @@ Feature: Kit
     Given test info id "4" and name "Rating_Activity_Elements"
     Given I log in with user "ccc" and password "333"
     Then I can add and remove an image
-
-  @Navigation
-  Scenario: AWS testing
-    Given test info id "5" and name "AWS"
-    Then aws works

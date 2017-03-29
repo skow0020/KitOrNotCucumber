@@ -7,10 +7,6 @@ import cucumber.api.java.en.Then;
 import cucumber.support.Hooks;
 import cucumber.support.Support;
 
-import com.parse.Parse;
-import com.parse.ParseACL;
-import com.parse.ParseUser;
-
 import java.io.InputStream;
 
 /**
@@ -57,15 +53,5 @@ public class KitSteps {
     public void iCanAddAndRemoveAnImage() throws Throwable {
         kitTest.verifyImageAdd();
         kitTest.verifyImageDelete();
-    }
-
-    @Then("^aws works$")
-    public void awsWorks() throws Throwable {
-        AmazonS3 s3Client = new AmazonS3Client(new ProfileCredentialsProvider());
-        S3Object object = s3Client.getObject(
-                new GetObjectRequest(bucketName, key));
-        InputStream objectData = object.getObjectContent();
-// Process the objectData stream.
-        objectData.close();
     }
 }
