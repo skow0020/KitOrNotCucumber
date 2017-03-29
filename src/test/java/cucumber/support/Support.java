@@ -1,32 +1,18 @@
-package tests;
+package cucumber.support;
 
 import api.android.Android;
 import api.apps.kitOrNot.KitTest;
 import core.Timer;
-import core.managers.TestManager;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
 
 /**
  * Created by Colin on 3/27/2017.
  */
-public class KitNavigation extends TestManager {
+public class Support {
     private static KitTest kitTest = Android.app.kitTest;
 
-    @BeforeClass
-    public static void beforeClass(){
-//        AmazonEC2 ec2 = new  AmazonEC2(myCredentials);
-//        ec2.setEndpoint("https://eu-west-1.ec2.amazonaws.com");
-
-        kitTest.open(); }
-
-    @Before
-    public void before()
+    public void loginScreen()
     {
-        testinfo.suite("KitNavigation");
-
         Timer timer = new Timer();
         timer.start();
         while(!timer.expired(10))
@@ -46,6 +32,7 @@ public class KitNavigation extends TestManager {
         Assert.assertTrue("Could not find element: " + kitTest.login.uiObject.login_signup_text(), kitTest.login.uiObject.login_signup_text().exists());
         Assert.assertTrue("Could not find element: " + kitTest.login.uiObject.logo(), kitTest.login.uiObject.logo().exists());
 
+        if (kitTest.login.uiObject.login_signup_text().getText().equals("Log In")) kitTest.login.uiObject.login_signup_text().tap();
         kitTest.login.uiObject.userName().clearText();
         kitTest.login.uiObject.userName().typeText(username);
         kitTest.login.uiObject.password().clearText();
@@ -53,11 +40,8 @@ public class KitNavigation extends TestManager {
         kitTest.login.uiObject.login_signup_button().tap();
     }
 
-    @Test
-    public void test2()
+    public void verifyUserHome()
     {
-        testinfo.id("Test2").name("Verify that User Home Activity has all elements");
-        login("Callie", "333");
         Assert.assertTrue(kitTest.userHomeActivity.uiObject.userCatsTitle().exists());
         Assert.assertTrue(kitTest.userHomeActivity.uiObject.addImageBtn().exists());
         Assert.assertTrue(kitTest.userHomeActivity.uiObject.gridView().exists());
@@ -67,22 +51,16 @@ public class KitNavigation extends TestManager {
         Assert.assertTrue(kitTest.userHomeActivity.uiObject.topCatsBtn().exists());
     }
 
-    @Test
-    public void test3()
+    public void verifyRatingActivity()
     {
-        testinfo.id("Test3").name("Verify that Rating Activity has all elements");
-        login("Callie", "333");
         kitTest.userHomeActivity.tapRatingActivityBtn().waitToLoad();
         Assert.assertTrue(kitTest.ratingActivity.uiObject.catImage().exists());
         Assert.assertTrue(kitTest.ratingActivity.uiObject.thumbDown().exists());
         Assert.assertTrue(kitTest.ratingActivity.uiObject.thumbUp().exists());
     }
 
-    @Test
-    public void test4()
+    public void verifyTopCats()
     {
-        testinfo.id("Test4").name("Verify that Top Cats Activity has all elements");
-        login("Callie", "333");
         kitTest.userHomeActivity.tapTopCatsBtn().waitToLoad();
         Assert.assertTrue(kitTest.topCatsActivity.uiObject.topCatTitle().exists());
         Assert.assertTrue(kitTest.topCatsActivity.uiObject.gridview().exists());
@@ -90,17 +68,19 @@ public class KitNavigation extends TestManager {
         Assert.assertTrue(kitTest.topCatsActivity.uiObject.gridImage1().exists());
     }
 
-    @Test
-    public void test5()
+
+    public void verifyImageAdd()
     {
-        testinfo.id("Test5").name("Add image from phone successfully");
-        login("ccc", "333");
         kitTest.userHomeActivity.tapAddCatImageBtn().waitToLoad();
         Assert.assertTrue(kitTest.photoAlbumActivity.uiObject.selectAlbumTitle().exists());
         kitTest.photoAlbumActivity.tapMainImage().waitToLoad();
         Assert.assertTrue(kitTest.selectImageActivity.uiObject.selectAlbumTitle().exists());
         kitTest.selectImageActivity.tapSelectImage().waitToLoad();
         Assert.assertTrue(kitTest.userHomeActivity.uiObject.gridImage0().exists());
+    }
+
+    public void verifyImageDelete()
+    {
         kitTest.userHomeActivity.uiObject.gridImage0().longClick();
         Assert.assertTrue(kitTest.userHomeActivity.uiObject.deleteBtn().exists());
         kitTest.userHomeActivity.uiObject.deleteBtn().tap();
