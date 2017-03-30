@@ -4,6 +4,7 @@ import api.android.Android;
 import api.apps.kitOrNot.photoAlbumActivity.PhotoAlbumActivity;
 import api.apps.kitOrNot.ratingActivity.RatingActivity;
 import api.apps.kitOrNot.topCatsActivity.TopCatsActivity;
+import api.apps.kitOrNot.userCatDetailsActivity.UserCatDetailsActivity;
 import api.interfaces.Activity;
 import core.MyLogger;
 import org.openqa.selenium.NoSuchElementException;
@@ -62,12 +63,24 @@ public class UserHomeActivity implements Activity {
         }
     }
 
-    public PhotoAlbumActivity longClickTopLeftImg()
+    public UserHomeActivity longClickTopLeftImg()
     {
         try{
             MyLogger.log.info("Long click on top left image");
             uiObject.gridImage0().longClick();
-            return Android.app.kitTest.photoAlbumActivity;
+            return Android.app.kitTest.userHomeActivity;
+        }catch (NoSuchElementException e)
+        {
+            throw new AssertionError("Can't long click top left image, element absent or blocked");
+        }
+    }
+
+    public UserCatDetailsActivity tapTopLeftImg()
+    {
+        try{
+            MyLogger.log.info("Tapping on top left image");
+            uiObject.gridImage0().tap();
+            return Android.app.kitTest.userCatDetailsActivity;
         }catch (NoSuchElementException e)
         {
             throw new AssertionError("Can't tap top left image, element absent or blocked");

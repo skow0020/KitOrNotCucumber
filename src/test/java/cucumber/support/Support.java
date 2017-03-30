@@ -53,7 +53,6 @@ public class Support {
 
     public void verifyRatingActivity()
     {
-        kitTest.userHomeActivity.tapRatingActivityBtn().waitToLoad();
         Assert.assertTrue(kitTest.ratingActivity.uiObject.catImage().exists());
         Assert.assertTrue(kitTest.ratingActivity.uiObject.thumbDown().exists());
         Assert.assertTrue(kitTest.ratingActivity.uiObject.thumbUp().exists());
@@ -61,7 +60,6 @@ public class Support {
 
     public void verifyTopCats()
     {
-        kitTest.userHomeActivity.tapTopCatsBtn().waitToLoad();
         Assert.assertTrue(kitTest.topCatsActivity.uiObject.topCatTitle().exists());
         Assert.assertTrue(kitTest.topCatsActivity.uiObject.gridview().exists());
         Assert.assertTrue(kitTest.topCatsActivity.uiObject.gridImage0().exists());
@@ -70,7 +68,6 @@ public class Support {
 
     public void verifyImageAdd()
     {
-        kitTest.userHomeActivity.tapAddCatImageBtn().waitToLoad();
         Assert.assertTrue(kitTest.photoAlbumActivity.uiObject.selectAlbumTitle().exists());
         kitTest.photoAlbumActivity.tapMainImage().waitToLoad();
         Assert.assertTrue(kitTest.selectImageActivity.uiObject.selectAlbumTitle().exists());
@@ -84,5 +81,24 @@ public class Support {
         Assert.assertTrue(kitTest.userHomeActivity.uiObject.deleteBtn().exists());
         kitTest.userHomeActivity.uiObject.deleteBtn().tap();
         Assert.assertTrue(!kitTest.userHomeActivity.uiObject.gridImage0().exists());
+    }
+
+    public void verifyInvalidLogin()
+    {
+        Assert.assertTrue("Login worked on invalid credentials!", !kitTest.userHomeActivity.uiObject.ratingActivityBtn().exists());
+        Assert.assertTrue(kitTest.login.uiObject.userName().exists());
+        Assert.assertTrue(kitTest.login.uiObject.userName().exists());
+    }
+
+    public void verifyTopCatDetails()
+    {
+        Assert.assertTrue(kitTest.topCatDetailsActivity.uiObject.catImage().exists());
+        Assert.assertTrue(kitTest.topCatDetailsActivity.uiObject.percentage().exists());
+    }
+
+    public void verifyUserCatDetails()
+    {
+        Assert.assertTrue(kitTest.userCatDetailsActivity.uiObject.catImage().exists());
+        Assert.assertTrue(kitTest.userCatDetailsActivity.uiObject.percentage().exists());
     }
 }
