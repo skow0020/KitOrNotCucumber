@@ -1,4 +1,4 @@
-package cucumber.support;
+package step_definitions;
 
 import api.android.Android;
 import api.apps.kitOrNot.KitTest;

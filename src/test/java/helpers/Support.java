@@ -1,4 +1,4 @@
-package cucumber.support;
+package helpers;
 
 import api.android.Android;
 import api.apps.kitOrNot.KitTest;
@@ -45,8 +45,6 @@ public class Support {
         Assert.assertTrue(kitTest.userHomeActivity.uiObject.userCatsTitle().exists());
         Assert.assertTrue(kitTest.userHomeActivity.uiObject.addImageBtn().exists());
         Assert.assertTrue(kitTest.userHomeActivity.uiObject.gridView().exists());
-        Assert.assertTrue(kitTest.userHomeActivity.uiObject.gridImage0().exists());
-        Assert.assertTrue(kitTest.userHomeActivity.uiObject.gridImage1().exists());
         Assert.assertTrue(kitTest.userHomeActivity.uiObject.ratingActivityBtn().exists());
         Assert.assertTrue(kitTest.userHomeActivity.uiObject.topCatsBtn().exists());
     }
@@ -72,6 +70,7 @@ public class Support {
         kitTest.photoAlbumActivity.tapMainImage().waitToLoad();
         Assert.assertTrue(kitTest.selectImageActivity.uiObject.selectAlbumTitle().exists());
         kitTest.selectImageActivity.tapSelectImage().waitToLoad();
+        kitTest.userHomeActivity.uiObject.gridImage0().waitToAppear(5);
         Assert.assertTrue(kitTest.userHomeActivity.uiObject.gridImage0().exists());
     }
 
@@ -80,6 +79,7 @@ public class Support {
         kitTest.userHomeActivity.uiObject.gridImage0().longClick();
         Assert.assertTrue(kitTest.userHomeActivity.uiObject.deleteBtn().exists());
         kitTest.userHomeActivity.uiObject.deleteBtn().tap();
+        kitTest.userHomeActivity.uiObject.gridImage0().waitToDisappear(5);
         Assert.assertTrue(!kitTest.userHomeActivity.uiObject.gridImage0().exists());
     }
 

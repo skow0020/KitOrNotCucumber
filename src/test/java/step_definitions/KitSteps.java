@@ -1,17 +1,15 @@
-package cucumber.steps;
+package step_definitions;
 
 import api.android.Android;
 import api.apps.kitOrNot.KitTest;
 import api.apps.kitOrNot.topCatsActivity.TopCatsActivity;
 import api.apps.kitOrNot.userHomeActivity.UserHomeActivity;
 import core.TestInfo;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import cucumber.support.Hooks;
-import cucumber.support.Support;
+import helpers.Support;
 
 /**
  * Created by Colin on 3/29/2017.
